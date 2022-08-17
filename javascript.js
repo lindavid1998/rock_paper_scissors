@@ -1,13 +1,10 @@
 function playRockPaperScissors() {
 
     // initialize score
-    scores = {
-        computer: 0,
-        user: 0
-    }
+    scores = {computer: 0, user: 0}
 
-    isPlaying = true;
     // while user wants to play
+    isPlaying = true;
     while (isPlaying) {
         // Ask computer to choose rock, paper, or scissors and store in variable compAns
         compAns = getCompAns();
@@ -19,7 +16,7 @@ function playRockPaperScissors() {
         console.log(`The computer chose: ${compAns}`)
         console.log(`You chose: ${userAns}`)
 
-        // Find winner and store in variable winner
+        // Determine winner and store in variable winner
         winner = getWinner(compAns, userAns);
 
         // Update score
@@ -36,18 +33,11 @@ function getCompAns() {
     // generate random number from 1 to 3 and assign to randNum
     randNum = Math.floor(Math.random() * 3)
 
-    // if 0, return 'p'
+    // convert randNum to rock, paper, or scissors and return
     if (randNum === 0) return 'p'
-    // if 1, return 's'
     if (randNum === 1) return 's'
-    // if 2, return 'r'
     if (randNum === 2) return 'r'
-
 }
-
-// function getUserAns() {
-//     return prompt('Choose between r, p, or s').toLowerCase()
-// }
 
 let getUserAns = () => prompt('Choose between r, p, or s').toLowerCase()
 
@@ -64,15 +54,12 @@ function updateScore(winner, scores) {
 
 function getWinner(comp, user) {
     // returns null if tie, otherwise returns string of winner ('computer' or 'user')
+
     if (comp === user) {
         console.log(`It's a tie`)
         return null
     }
 
-    //  User wins under the following scenarios:
-    // Comp: r -> User: p
-    // Comp: p -> User: s
-    // Comp: s -> User: r
     switch (true) {
         case (comp === 'r' && user === 'p'):
         case (comp === 'p' && user === 's'):
