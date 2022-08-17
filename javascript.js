@@ -19,11 +19,26 @@ function playRockPaperScissors() {
         winner = getWinner(compAns, userAns);
 
         // Update score
-        updateScore(winner);
+        updateScore(winner, scores);
 
         // Show score
         console.log(`Score: Computer ${scores.computer} - User ${scores.user}`)
 
         // Ask user if they want to continue playing and store in variable 
+    }
+}
+
+function getUserAns() {
+    return prompt('Choose between R, P, or S').toLowerCase()
+}
+
+function updateScore(winner, scores) {
+    switch (winner) {
+        case 'computer':
+            scores.computer++;
+            break;
+        case 'user':
+            scores.user++;
+            break;
     }
 }
