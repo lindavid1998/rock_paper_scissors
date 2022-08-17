@@ -28,8 +28,21 @@ function playRockPaperScissors() {
     }
 }
 
+function getCompAns() {
+    // generate random number from 1 to 3 and assign to randNum
+    randNum = Math.floor(Math.random() * 3)
+
+    // if 0, return 'p'
+    if (randNUm === 0) return 'p'
+    // if 1, return 's'
+    if (randNum === 1) return 's'
+    // if 2, return 'r'
+    if (randNum === 2) return 'r'
+
+}
+
 function getUserAns() {
-    return prompt('Choose between R, P, or S').toLowerCase()
+    return prompt('Choose between r, p, or s').toLowerCase()
 }
 
 function updateScore(winner, scores) {
@@ -41,4 +54,24 @@ function updateScore(winner, scores) {
             scores.user++;
             break;
     }
+}
+
+function getWinner(comp, user) {
+    // returns null if tie, otherwise returns string of winner ('computer' or 'user')
+    if (comp === user) {
+        return null
+    }
+
+    //  User wins under the following scenarios:
+    // Comp: r -> User: p
+    // Comp: p -> User: s
+    // Comp: s -> User: r
+    switch (true) {
+        case (comp === 'r' && user === 'p'):
+        case (comp === 'p' && user === 's'):
+        case (comp === 's' && user === 'r'):
+            return 'user'
+    }
+
+    return 'computer'
 }
