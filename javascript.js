@@ -6,7 +6,7 @@ function playRockPaperScissors() {
         user: 0
     }
 
-    isPlaying = True;
+    isPlaying = true;
     // while user wants to play
     while (isPlaying) {
         // Ask computer to choose rock, paper, or scissors and store in variable compAns
@@ -14,6 +14,10 @@ function playRockPaperScissors() {
 
         // Ask user to choose rock, paper, or scissors and store in variable userAns
         userAns = getUserAns();
+
+        // Print results to console
+        console.log(`The computer chose: ${compAns}`)
+        console.log(`You chose: ${userAns}`)
 
         // Find winner and store in variable winner
         winner = getWinner(compAns, userAns);
@@ -33,7 +37,7 @@ function getCompAns() {
     randNum = Math.floor(Math.random() * 3)
 
     // if 0, return 'p'
-    if (randNUm === 0) return 'p'
+    if (randNum === 0) return 'p'
     // if 1, return 's'
     if (randNum === 1) return 's'
     // if 2, return 'r'
@@ -59,6 +63,7 @@ function updateScore(winner, scores) {
 function getWinner(comp, user) {
     // returns null if tie, otherwise returns string of winner ('computer' or 'user')
     if (comp === user) {
+        console.log(`It's a tie`)
         return null
     }
 
@@ -70,8 +75,12 @@ function getWinner(comp, user) {
         case (comp === 'r' && user === 'p'):
         case (comp === 'p' && user === 's'):
         case (comp === 's' && user === 'r'):
+            console.log('You win!')
             return 'user'
     }
 
+    console.log('You lost.')
     return 'computer'
 }
+
+playRockPaperScissors();
