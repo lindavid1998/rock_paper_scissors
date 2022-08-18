@@ -12,6 +12,8 @@ function playRockPaperScissors() {
         // Ask user to choose rock, paper, or scissors and store in variable userAns
         userAns = getUserAns();
 
+        if (userAns === null) break;
+
         // Print results to console
         console.log(`The computer chose: ${compAns}`)
         console.log(`You chose: ${userAns}`)
@@ -24,8 +26,6 @@ function playRockPaperScissors() {
 
         // Show score   
         console.log(`Score: Computer ${scores.computer} - User ${scores.user}`)
-
-        // Ask user if they want to continue playing and store in variable 
     }
 }
 
@@ -39,7 +39,12 @@ function getCompAns() {
     if (randNum === 2) return 'r'
 }
 
-let getUserAns = () => prompt('Choose between r, p, or s').toLowerCase()
+function getUserAns() {
+    let ans = prompt('Choose between r, p, or s, or hit cancel to stop playing.')
+    return (ans === null) ? ans : ans.toLowerCase()
+}
+
+// let getUserAns = () => prompt('Choose between r, p, or s, or hit cancel to stop playing').toLowerCase()
 
 function updateScore(winner, scores) {
     switch (winner) {
