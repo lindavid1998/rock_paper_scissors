@@ -40,11 +40,20 @@ function getCompAns() {
 }
 
 function getUserAns() {
-    let ans = prompt('Choose between r, p, or s, or hit cancel to stop playing.')
-    return (ans === null) ? ans : ans.toLowerCase()
-}
+    let ans;
+    while(true) {
+        ans = prompt('Choose between r, p, or s, or hit Cancel to stop playing.')
 
-// let getUserAns = () => prompt('Choose between r, p, or s, or hit cancel to stop playing').toLowerCase()
+        if (ans !== null) ans.toLowerCase()
+
+        if (ans === null || ans === 'p' || ans === 'r' || ans === 's') {
+            break;
+        }
+
+        alert('Invalid input. Try again.')
+    }
+    return ans
+}
 
 function updateScore(winner, scores) {
     switch (winner) {
