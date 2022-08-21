@@ -4,14 +4,15 @@ function playRockPaperScissors() {
     scores = {computer: 0, user: 0}
 
     // while user wants to play
-    isPlaying = true;
-    while (isPlaying) {
+    playing = true;
+    while (playing) {
         // Ask computer to choose rock, paper, or scissors and store in variable compAns
         compAns = getCompAns();
 
         // Ask user to choose rock, paper, or scissors and store in variable userAns
         userAns = getUserAns();
 
+        // End game if user chose to cancel
         if (userAns === null) break;
 
         // Print results to console
