@@ -5,8 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Demo</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Rock, paper, or scissors?</h1>
+    <div class=buttons>
+        <button>Rock</button>
+        <button>Paper</button>
+        <button>Scissors</button>
+    </div>
+    
+    <h1>Score</h1>
+    <div class="computer-score">Computer: </div>
+    <div class="user-score">You: </div>
     <script src="javascript.js"></script>
 </body>
 </html>
