@@ -11,23 +11,23 @@ function playRockPaperScissors(e) {
     winner = getWinner(compAns, userAns);
 
     updateScore(winner, scores);
-    let compScore = document.querySelector('.computer-score');
-    let userScore = document.querySelector('.user-score')
+    let score = document.querySelector('.score');
     let result = document.querySelector(`.result`)
-    userScore.textContent = `You: ${scores.user}`
-    compScore.textContent = `Computer: ${scores.computer}`
-    result.textContent = `You chose ${userAns} while the computer chose ${compAns}. The result: ${winner}`
+    let description = document.querySelector(`.description`)
+    score.textContent = `You: ${scores.user} - Computer: ${scores.computer}`
+    result.textContent = `${winner}`
+    description.textContent = `You chose ${userAns} while the computer chose ${compAns}.`
 
     if (scores.user >= 5 || scores.computer >= 5) {
-        let para = document.createElement('p')
-        let body = document.querySelector('body')
+        let h1 = document.createElement('h1')
+        let container = document.querySelector('.container')
 
         if (scores.user > scores.computer) {
-            para.textContent = 'Game over. You won!'
+            h1.textContent = 'Game over. You won!'
         } else {
-            para.textContent = 'Game over. You lost.'
+            h1.textContent = 'Game over. You lost.'
         }
-        body.appendChild(para)
+        container.appendChild(h1)
 
         buttons.forEach(button => button.removeEventListener('click', playRockPaperScissors))
     }
