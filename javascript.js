@@ -1,90 +1,68 @@
-function playRockPaperScissors() {
+scores = {computer: 0, user: 0}
 
-    // initialize score
-    scores = {computer: 0, user: 0}
+let buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', playRockPaperScissors))
 
-    // while user wants to play
-    playing = true;
-    while (playing) {
-        // Ask computer to choose rock, paper, or scissors and store in variable compAns
-        compAns = getCompAns();
+function playRockPaperScissors(e) {
 
-        // Ask user to choose rock, paper, or scissors and store in variable userAns
-        userAns = getUserAns();
+    let userAns = e.target.textContent;
+    let compAns = getCompAns();
 
-        // End game if user chose to cancel
-        if (userAns === null) break;
+    winner = getWinner(compAns, userAns);
 
-        // Print results to console
-        console.log(`The computer chose: ${compAns}`)
-        console.log(`You chose: ${userAns}`)
+    updateScore(winner, scores);
+    let compScore = document.querySelector('.computer-score');
+    let userScore = document.querySelector('.user-score')
+    let result = document.querySelector(`.result`)
+    userScore.textContent = `You: ${scores.user}`
+    compScore.textContent = `Computer: ${scores.computer}`
+    result.textContent = `You chose ${userAns} while the computer chose ${compAns}. The result: ${winner}`
 
-        // Determine winner and store in variable winner
-        winner = getWinner(compAns, userAns);
+    if (scores.user >= 5 || scores.computer >= 5) {
+        let para = document.createElement('p')
+        let body = document.querySelector('body')
 
-        // Update score
-        updateScore(winner, scores);
+        if (scores.user > scores.computer) {
+            para.textContent = 'Game over. You won!'
+        } else {
+            para.textContent = 'Game over. You lost.'
+        }
+        body.appendChild(para)
 
-        // Show score   
-        console.log(`Score: Computer ${scores.computer} - User ${scores.user}`)
+        buttons.forEach(button => button.removeEventListener('click', playRockPaperScissors))
     }
 }
-
+    
 function getCompAns() {
     // generate random number from 1 to 3 and assign to randNum
     randNum = Math.floor(Math.random() * 3)
 
     // convert randNum to rock, paper, or scissors and return
-    if (randNum === 0) return 'p'
-    if (randNum === 1) return 's'
-    if (randNum === 2) return 'r'
-}
-
-function getUserAns() {
-    let ans;
-    while(true) {
-        ans = prompt('Choose between r, p, or s, or hit Cancel to stop playing.')
-
-        if (ans !== null) ans.toLowerCase()
-
-        if (ans === null || ans === 'p' || ans === 'r' || ans === 's') {
-            break;
-        }
-
-        alert('Invalid input. Try again.')
-    }
-    return ans
-}
-
-function updateScore(winner, scores) {
-    switch (winner) {
-        case 'computer':
-            scores.computer++;
-            break;
-        case 'user':
-            scores.user++;
-            break;
-    }
+    if (randNum === 0) return 'Paper'
+    if (randNum === 1) return 'Scissors'
+    if (randNum === 2) return 'Rock'
 }
 
 function getWinner(comp, user) {
     // returns null if tie, otherwise returns string of winner ('computer' or 'user')
-
     if (comp === user) {
-        console.log(`It's a tie`)
-        return null
+        return 'Tie'
     }
 
     switch (true) {
-        case (comp === 'r' && user === 'p'):
-        case (comp === 'p' && user === 's'):
-        case (comp === 's' && user === 'r'):
-            console.log('You win!')
-            return 'user'
+        case (comp === 'Rock' && user === 'Paper'):
+        case (comp === 'Paper' && user === 'Scissors'):
+        case (comp === 'Scissors' && user === 'Rock'):
+            return 'User wins!'
     }
 
-    console.log('You lost.')
-    return 'computer'
+    return 'Computer wins!'
 }
 
-playRockPaperScissors();
+function updateScore(winner, scores) {
+    if (winner === 'Computer wins!') {
+        scores.computer++;
+    } else if (winner === 'User wins!') {
+        scores.user++;
+    }
+}
